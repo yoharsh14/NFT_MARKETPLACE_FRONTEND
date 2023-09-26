@@ -6,9 +6,10 @@ import networkMapping from "../constants/networkMapping.json";
 import { ethers } from "ethers";
 export default function Home() {
   const { chainId } = useMoralis();
-  const chainString = chainId ? parseInt(chainId).toString() : "";
-  const temp = networkMapping[chainString];
-  const marketplaceAddress = temp["NftMarketplace"][0];
+  const chainString = chainId ? parseInt(chainId).toString() : null;
+  const marketplaceAddress = chainId
+    ? networkMapping[chainString]["NftMarketplace"][0]
+    : null;
   const dispatch = useNotification();
   const { runContractFunction } = useWeb3Contract();
   async function approveAndList(data) {
