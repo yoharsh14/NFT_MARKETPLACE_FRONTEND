@@ -5,7 +5,6 @@ import nftAbi from "../constants/BasicNft.json";
 import Image from "next/image";
 import { Card, Etherscan, useNotification } from "web3uikit";
 import { ethers } from "ethers";
-import { URL } from "next/dist/compiled/@edge-runtime/primitives/url";
 const truncateStr = (fullStr, strLen) => {
   if (fullStr.length <= strLen) return fullStr;
   const seperator = "...";

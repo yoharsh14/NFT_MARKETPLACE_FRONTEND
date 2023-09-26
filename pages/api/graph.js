@@ -24,17 +24,15 @@ export default function Graph() {
   }, []);
   return (
     <div>
-      <div>
-        {data.itemsListeds.map((nft) => {
-          const { price, nftAddress, tokenId, seller } = nft;
-          return (
-            <div>
-              Price:{price}, nftAddress{nftAddress}, tokenId{tokenId}, seller
-              {seller}
-            </div>
-          );
-        })}
-      </div>
+      {data.itemsListeds.map((nft) => {
+        const { price, nftAddress, tokenId, seller } = nft;
+        return (
+          <div>
+            Price:{price}, nftAddress{nftAddress}, tokenId{tokenId}, seller
+            {seller}
+          </div>
+        );
+      })}
     </div>
   );
 }

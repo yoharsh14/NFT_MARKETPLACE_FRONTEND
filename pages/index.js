@@ -1,9 +1,6 @@
-// import styles from "../styles/Home.module.css"
 import { useMoralis } from "react-moralis";
 import NFTBox from "../components/NFTBox";
 import networkMapping from "../constants/networkMapping.json";
-// import GET_ACTIVE_ITEMS from "../constants/subgraphQueries";
-import { useQuery } from "@apollo/client";
 import { createClient } from "urql";
 import { Fragment, useEffect, useState } from "react";
 export default function Home() {
