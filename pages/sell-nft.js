@@ -3,12 +3,12 @@ import nftMarketplaceAbi from "../constants/NftMarketplace.json";
 import nftAbi from "../constants/BasicNft.json";
 import { useMoralis, useWeb3Contract } from "react-moralis";
 import networkMapping from "../constants/networkMapping.json";
-import { useWeb3Contract } from "react-moralis";
 import { ethers } from "ethers";
 export default function Home() {
   const { chainId } = useMoralis();
   const chainString = chainId ? parseInt(chainId).toString() : "";
-  const marketplaceAddress = networkMapping[chainString].nftMarketplace[0];
+  const temp = networkMapping[chainString];
+  const marketplaceAddress = temp["NftMarketplace"][0];
   const dispatch = useNotification();
   const { runContractFunction } = useWeb3Contract();
   async function approveAndList(data) {
@@ -35,7 +35,7 @@ export default function Home() {
       },
     });
   }
-  async function handleApproveSuccess(nftAddress, tokneId, price) {
+  async function handleApproveSuccess(nftAddress, tokenId, price) {
     console.log("Ok! Now time to list");
     const listOptions = {
       abi: nftMarketplaceAbi,
@@ -62,7 +62,7 @@ export default function Home() {
     });
   }
   return (
-    <div>
+    <div className="flex flex-col justify-center items-center m-5 border-solid border-black">
       <Form
         onSubmit={approveAndList}
         data={[

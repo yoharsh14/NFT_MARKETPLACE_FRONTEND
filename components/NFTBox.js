@@ -5,7 +5,7 @@ import nftAbi from "../constants/BasicNft.json";
 import Image from "next/image";
 import { Card, Etherscan, useNotification } from "web3uikit";
 import { ethers } from "ethers";
-import updateListingModal from "./UpdateListingModal";
+import { URL } from "next/dist/compiled/@edge-runtime/primitives/url";
 const truncateStr = (fullStr, strLen) => {
   if (fullStr.length <= strLen) return fullStr;
   const seperator = "...";
@@ -38,17 +38,10 @@ export default function NFTBox({
   async function updateUI() {
     //get the tokenURI
     const tokenURI = await getTokenURI();
-    console.log(`tokenURI: ${tokenURI}`);
     if (tokenURI) {
-      //IPFS Gateway: A server that will return IPFS files from a "normal" URL.
-      const requestURL = tokenURI.replace("ipfs://", "https://ipfs.io/ipfs/");
-      const tokenURIResponse = await (await fetch(requestURL)).json();
-      const imageURI = tokenURIResponse.image;
-      const imageURIURL = imageURI.replace("ipfs://", "https://ipfs.io/ipfs/");
-      setImageURI(imageURIURL);
-      setTokenName(tokenURIResponse.name);
-      setTokenDescription(tokenURIResponse.description);
-      // we could render the server
+      const uri = encodeURI(tokenURI);
+      let tempuri = uri.slice(3, uri.length - 3);
+      setImageURI(tempuri);
     }
   }
 
@@ -97,6 +90,7 @@ export default function NFTBox({
     params: {
       nftAddress: nftAddress,
       tokenId: tokenId,
+      price: price,
     },
   });
   /***********************************************************/
@@ -117,17 +111,16 @@ export default function NFTBox({
               description={tokenDescription}
               onClick={handleCardClick}
             >
-              <div className="flex felx-col items-end gap-3">
-                <div>#{tokenId}</div>
-                <div className="italic text-sm">
-                  Owned by{formatedSellerAddress}
-                </div>
+              <div className="flex flex-col justify-center items-center p-3 gap-2 font-semibold">
                 <Image
                   loader={() => imageURI}
                   src={imageURI}
                   height={"200"}
                   width={"100"}
                 />
+                <div className="italic text-sm">
+                  #{tokenId} Owned by{formatedSellerAddress}
+                </div>
                 <div>{ethers.utils.formatUnits(price, "ether")}ETH</div>
               </div>
             </Card>

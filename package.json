@@ -12,7 +12,7 @@
     "@apollo/client": "^3.7.14",
     "@moralisweb3/next": "^2.19.0",
     "autoprefixer": "^10.4.14",
-    "graphql": "^16.6.0",
+    "graphql": "^16.8.1",
     "magic-sdk": "^17.1.4",
     "moralis": "^2.19.0",
     "moralis-v1": "^1.11.0",
@@ -23,6 +23,7 @@
     "react-dom": "^18.2.0",
     "react-moralis": "^1.4.2",
     "tailwindcss": "^3.3.1",
+    "urql": "^3.0.3",
     "web3uikit": "^1.0.4"
   }
 }
